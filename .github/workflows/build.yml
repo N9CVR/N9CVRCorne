@@ -4,3 +4,16 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+
+- name: Build
+  uses: zmkfirmware/action-build@v0.3
+
+- name: Inspect generated device tree
+  if: always()
+  run: |
+    find . -name zephyr.dts -o -name edt.pickle
+    for f in $(find . -name zephyr.dts); do
+      echo "===== $f ====="
+      grep -n -A12 -B4 -E 'led_strip|ws2812|zmk,underglow|spi3' "$f" || true
+    done
+
