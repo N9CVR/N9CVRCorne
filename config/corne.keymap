@@ -18,6 +18,15 @@
 };
 
 / {
+    conditional_layers {
+    compatible = "zmk,conditional-layers";
+ 
+        adjust_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -37,29 +46,51 @@
 
         lower_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | DEL |
-// |      | BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN | UP  | RGT |     |     |
-// | SHFT | TOG | EFF | BRI | BRD | HUI |   | HUD |     |     |     |     |BTCLR|
+// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC|
+// |      |PLAY |MUTE |VOLD |VOLU |     |   | LFT | DWN | UP  | RGT |     |     |
+// | SHFT | TOG | EFF | BRI | BRD | HUI |   | HOME| PGDN| PGUP| END |     |     |
 //                    | GUI |     | ENT |   | SPC |     | ALT |
             bindings = <
-   &kp TAB   &kp N1          &kp N2          &kp N3          &kp N4          &kp N5          &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp DEL
-   &trans    &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT &rgb_ug RGB_TOG &rgb_ug RGB_EFF &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_HUI &rgb_ug RGB_HUD &trans &trans &trans &trans &bt BT_CLR
-                                  &kp LGUI &trans &kp RET      &kp SPACE &trans &kp RALT
+   &kp TAB   &kp N1           &kp N2          &kp N3          &kp N4          &kp N5          &kp N6    &kp N7    &kp N8 &kp N9    &kp N0 &trans
+   &trans    &kp C_PLAY_PAUSE &kp C_MUTE      &kp C_VOL_DN    &kp C_VOL_UP    &trans          &kp LEFT  &kp DOWN  &kp UP &kp RIGHT &trans &trans
+   &kp LSHFT &rgb_ug RGB_TOG  &rgb_ug RGB_EFF &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_HUI &kp HOME  &kp PG_DN &kp PG_UP &kp END &trans &trans
+                                              &kp LGUI        &trans          &kp RET         &kp SPACE &trans    &kp RALT
             >;
         };
 
         raise_layer {
 // -----------------------------------------------------------------------------------------
-// | TAB  |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
+// | TAB  |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | DEL  |
 // | CTRL | F1  | F2  | F3  | F4  | F5  |   |  -  |  =  |  [  |  ]  |  \  |  `   |
 // | SHFT | F6  | F7  | F8  | F9  | F10 |   |  _  |  +  |  {  |  }  |  |  |  ~   |
 //                    | GUI |     | ENT |   | SPC |     | ALT |
             bindings = <
-   &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
+   &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
    &kp LCTRL &kp F1   &kp F2 &kp F3   &kp F4   &kp F5      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
    &kp LSHFT &kp F6   &kp F7 &kp F8   &kp F9   &kp F10     &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
                               &kp LGUI &trans &kp RET         &kp SPACE &trans &kp RALT
+            >;
+        };
+
+        adjust_layer {
+ 
+// -----------------------------------------------------------------------------------------
+// |RESET| BT0 | BT1 | BT2 | BT3 | BT4 |  | | | | | | DEL |
+// |     |     |     |     |     |     |  | | | | | |     |
+// |CAPS |     |     |     |     |     |  | | | | | |BTCLR|
+//                   |     |     |     |  | | | |
+ 
+            bindings = <
+//&sys_reset &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &none &none  &none &none &none &kp DEL
+//&none      &none        &none        &none        &none        &none           &none &none  &none &none &none &none
+//&kp CAPS   &none        &none        &none        &none        &none           &none &none  &none &none &none &bt BT_CLR
+//                                     &none        &trans       &none           &none &trans &none
+
+
+&sys_reset &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4     &none            &none          &none        &none           &none       &kp DEL
+&none      &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP   &msc SCRL_RIGHT &none           &mmv MOVE_LEFT   &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none       &none
+&kp CAPS   &none          &none          &none          &none           &none           &none            &none          &none        &none           &none       &bt BT_CLR
+                                         &mkp MCLK       &trans         &mkp LCLK       &mkp RCLK        &trans         &none
             >;
         };
     };
