@@ -1,2 +1,3 @@
-
-.zmk/
+build/
+*.uf2
+*.zip
