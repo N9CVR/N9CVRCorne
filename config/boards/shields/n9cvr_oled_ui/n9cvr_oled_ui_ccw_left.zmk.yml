@@ -1,6 +1,0 @@
-file_format: "1"
-id: n9cvr_oled_ui_ccw_left
-name: N9CVR OLED UI (portrait counter-clockwise, left)
-type: shield
-features:
-  - display

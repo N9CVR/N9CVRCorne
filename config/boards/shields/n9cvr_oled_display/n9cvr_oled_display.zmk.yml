@@ -1,8 +1,0 @@
-file_format: "1"
-id: n9cvr_oled_display
-name: N9CVR 128x32 OLED hardware
-url: https://zmk.dev/docs/features/displays
-requires: [pro_micro]
-type: shield
-features:
-  - display

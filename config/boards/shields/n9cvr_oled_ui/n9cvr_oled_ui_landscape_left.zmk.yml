@@ -1,6 +1,0 @@
-file_format: "1"
-id: n9cvr_oled_ui_landscape_left
-name: N9CVR OLED UI (native landscape fallback, left)
-type: shield
-features:
-  - display
