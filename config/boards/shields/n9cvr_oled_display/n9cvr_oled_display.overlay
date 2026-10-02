@@ -1,0 +1,30 @@
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * Common 0.91-inch 128x32 I2C SSD1306 on a Pro Micro compatible controller.
+ * If your keyboard shield already defines zephyr,display, do not add this shield.
+ */
+
+&pro_micro_i2c {
+    status = "okay";
+
+    n9cvr_oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <32>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        segment-remap;
+        com-invdir;
+        prechargep = <0x22>;
+    };
+};
+
+/ {
+    chosen {
+        zephyr,display = &n9cvr_oled;
+    };
+};

@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+
+config SHIELD_N9CVR_OLED_UI_CW
+    def_bool $(shields_list_contains,n9cvr_oled_ui_cw)
+
+config SHIELD_N9CVR_OLED_UI_CCW
+    def_bool $(shields_list_contains,n9cvr_oled_ui_ccw)
+
+config SHIELD_N9CVR_OLED_UI_LANDSCAPE
+    def_bool $(shields_list_contains,n9cvr_oled_ui_landscape)
