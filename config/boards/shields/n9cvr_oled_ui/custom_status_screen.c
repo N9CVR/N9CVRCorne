@@ -2,7 +2,7 @@
  * N9CVR split OLED status screen
  * SPDX-License-Identifier: MIT
  *
- * Target: current ZMK/LVGL, 128x32 SSD1306 displays mounted vertically.
+ * Target: pinned ZMK v0.3 (LVGL 8) and newer, 128x32 SSD1306 displays mounted vertically.
  * Left/central: output, battery, layer, WPM.
  * Right/peripheral: N9CVR in Montserrat plus split-link status.
  */
@@ -39,13 +39,15 @@ static struct zmk_widget_peripheral_status peripheral_status_widget;
 #endif
 
 static void set_display_rotation(void) {
-#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_CW)
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_CW_LEFT) || \
+    IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_CW_RIGHT)
 #if LVGL_VERSION_MAJOR >= 9
     lv_display_set_rotation(lv_display_get_default(), LV_DISPLAY_ROTATION_90);
 #else
     lv_disp_set_rotation(lv_disp_get_default(), LV_DISP_ROT_90);
 #endif
-#elif IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_CCW)
+#elif IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_CCW_LEFT) || \
+    IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_CCW_RIGHT)
 #if LVGL_VERSION_MAJOR >= 9
     lv_display_set_rotation(lv_display_get_default(), LV_DISPLAY_ROTATION_270);
 #else
@@ -80,6 +82,7 @@ static void add_rule(lv_obj_t *screen, lv_coord_t y) {
     lv_obj_align(rule, LV_ALIGN_TOP_MID, 0, y);
 }
 
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_RIGHT)
 static lv_obj_t *make_label(lv_obj_t *parent, const char *text, const lv_font_t *font) {
     lv_obj_t *label = lv_label_create(parent);
     lv_label_set_text(label, text);
@@ -89,7 +92,9 @@ static lv_obj_t *make_label(lv_obj_t *parent, const char *text, const lv_font_t 
     lv_obj_set_style_text_color(label, lv_color_white(), LV_PART_MAIN);
     return label;
 }
+#endif
 
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_LEFT)
 static void build_central_portrait(lv_obj_t *screen) {
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_OUTPUT_STATUS)
     zmk_widget_output_status_init(&output_status_widget, screen);
@@ -118,22 +123,6 @@ static void build_central_portrait(lv_obj_t *screen) {
 #endif
 }
 
-static void build_peripheral_portrait(lv_obj_t *screen) {
-    lv_obj_t *call = make_label(screen, "N\n9\nC\nV\nR", &lv_font_montserrat_14);
-    lv_obj_set_style_text_line_space(call, 1, LV_PART_MAIN);
-    lv_obj_align(call, LV_ALIGN_TOP_MID, 0, 2);
-
-    add_rule(screen, 87);
-
-    lv_obj_t *link = make_label(screen, "LINK", &lv_font_montserrat_10);
-    lv_obj_align(link, LV_ALIGN_TOP_MID, 0, 91);
-
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_PERIPHERAL_STATUS)
-    zmk_widget_peripheral_status_init(&peripheral_status_widget, screen);
-    center_widget_at(zmk_widget_peripheral_status_obj(&peripheral_status_widget), 106);
-#endif
-}
-
 static void build_central_landscape(lv_obj_t *screen) {
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_OUTPUT_STATUS)
     zmk_widget_output_status_init(&output_status_widget, screen);
@@ -152,6 +141,24 @@ static void build_central_landscape(lv_obj_t *screen) {
     lv_obj_align(zmk_widget_wpm_status_obj(&wpm_status_widget), LV_ALIGN_BOTTOM_RIGHT, -1, -1);
 #endif
 }
+#endif /* CONFIG_SHIELD_N9CVR_OLED_UI_LEFT */
+
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_RIGHT)
+static void build_peripheral_portrait(lv_obj_t *screen) {
+    lv_obj_t *call = make_label(screen, "N\n9\nC\nV\nR", &lv_font_montserrat_14);
+    lv_obj_set_style_text_line_space(call, 1, LV_PART_MAIN);
+    lv_obj_align(call, LV_ALIGN_TOP_MID, 0, 2);
+
+    add_rule(screen, 87);
+
+    lv_obj_t *link = make_label(screen, "LINK", &lv_font_montserrat_10);
+    lv_obj_align(link, LV_ALIGN_TOP_MID, 0, 91);
+
+#if IS_ENABLED(CONFIG_ZMK_WIDGET_PERIPHERAL_STATUS)
+    zmk_widget_peripheral_status_init(&peripheral_status_widget, screen);
+    center_widget_at(zmk_widget_peripheral_status_obj(&peripheral_status_widget), 106);
+#endif
+}
 
 static void build_peripheral_landscape(lv_obj_t *screen) {
     lv_obj_t *call = lv_label_create(screen);
@@ -165,6 +172,7 @@ static void build_peripheral_landscape(lv_obj_t *screen) {
     lv_obj_align(zmk_widget_peripheral_status_obj(&peripheral_status_widget), LV_ALIGN_RIGHT_MID, -4, 0);
 #endif
 }
+#endif /* CONFIG_SHIELD_N9CVR_OLED_UI_RIGHT */
 
 lv_obj_t *zmk_display_status_screen(void) {
     set_display_rotation();
@@ -172,14 +180,15 @@ lv_obj_t *zmk_display_status_screen(void) {
     lv_obj_t *screen = lv_obj_create(NULL);
     style_screen(screen);
 
-#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_LANDSCAPE)
-#if IS_ENABLED(CONFIG_ZMK_SPLIT) && !IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_LANDSCAPE_LEFT) || \
+    IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_LANDSCAPE_RIGHT)
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_RIGHT)
     build_peripheral_landscape(screen);
 #else
     build_central_landscape(screen);
 #endif
 #else
-#if IS_ENABLED(CONFIG_ZMK_SPLIT) && !IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+#if IS_ENABLED(CONFIG_SHIELD_N9CVR_OLED_UI_RIGHT)
     build_peripheral_portrait(screen);
 #else
     build_central_portrait(screen);
