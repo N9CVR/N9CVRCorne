@@ -99,6 +99,7 @@
         Game {
             timeout-ms = <50>;
             key-positions = <40 41>;
+            layers = <0>;
             bindings = <&tog 5>;
         };
     };
@@ -126,14 +127,14 @@
             label= "NUM";
             // -------------------------------------------------------------------------------------------------------
             // |        |   1    |   2    |   3    |   4    |   5    |   |   6    |   7    |   8    |   9    |   0    |  DEL   |
-            // |        |        |        |        |        |        |   |  LFT   |  DWN   |   UP   |  RGT   |        |        |
-            // |        |        |        |        |        |        |   |  HOME  |  PGDN  |  PGUP  |  END   |        |        |
+            // |        |        |        |        |        |        |   |  LFT   |  DWN   |   UP   |  RGT   |        |  END   |
+            // |        |        |        |        |        |        |   |  HOME  |  PGDN  |  PGUP  |        |        |        |
             //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
             display-name = "Numbers";
             bindings = <
                 &trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp DEL
-                &trans  &trans  &trans  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &kp END
+                &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &trans  &trans  &trans
                 &kp LGUI  &trans  &kp RET  &kp SPACE  &trans  &kp RALT
             >;
         };
@@ -147,7 +148,7 @@
             //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
             display-name = "F-Keys";
             bindings = <
-                &kp TAB  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp DEL
+                &kp TAB  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &kp DEL
                 &kp LCTRL  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
                 &kp LSHFT  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp UNDER  &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
                 &kp LGUI  &trans  &kp RET  &kp SPACE  &trans  &kp RALT
@@ -164,9 +165,9 @@
 
             display-name = "MouseAndNum";
             bindings = <
-                &none  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans  &kp 7  &kp 8  &kp 9  &kp MINUS  &none  &kp DEL
+                &none  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none  &kp 7  &kp 8  &kp 9  &kp MINUS  &none  &kp DEL
                 &none  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none  &kp 4  &kp 5  &kp 6  &kp PLUS  &none  &none
-                &kp CAPS  &trans  &trans  &none  &mkp MCLK  &none  &kp 1  &kp 2  &kp 3  &kp ASTRK  &kp FSLH  &kp RET
+                &kp CAPS  &none  &none  &none  &mkp MCLK  &none  &kp 1  &kp 2  &kp 3  &kp ASTRK  &kp FSLH  &kp RET
                 &mkp LCLK  &trans  &mkp RCLK  &kp 0  &trans  &none
             >;
         };
