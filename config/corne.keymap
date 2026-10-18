@@ -95,17 +95,23 @@
             bindings = <&mo 4>;
             slow-release;
         };
+
+        Game {
+            timeout-ms = <50>;
+            key-positions = <40 41>;
+            bindings = <&tog 5>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | ENT |   | SPC | RSE | ALT |
+        default {
+            // -------------------------------------------------------------------------------------------------------
+            // |  TAB   |   Q    |   W    |   E    |   R    |   T    |   |   Y    |   U    |   I    |   O    |   P    |  BSPC  |
+            // |  CTRL  |   A    |   S    |   D    |   F    |   G    |   |   H    |   J    |   K    |   L    |   ;    |   '    |
+            // |  SHFT  |   Z    |   X    |   C    |   V    |   B    |   |   N    |   M    |   ,    |   .    |   /    |  ESC   |
+            //                            |  GUI   |  LWR   |  ENT   |   |  SPC   |  RSE   |  ALT   |
             bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U &kp I     &kp O   &kp P    &kp BSPC
    &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J &kp K     &kp L   &kp SEMI &kp SQT
@@ -116,12 +122,12 @@
 
         lower_layer {
             // -------------------------------------------------------------------------------------------------------
-            // |  TAB   |   1    |   2    |   3    |   4    |   5    |   |   6    |   7    |   8    |   9    |   0    |        |
+            // |        |   1    |   2    |   3    |   4    |   5    |   |   6    |   7    |   8    |   9    |   0    |  DEL   |
             // |        |        |        |        |        |        |   |  LFT   |  DWN   |   UP   |  RGT   |        |        |
             // |        |        |        |        |        |        |   |  HOME  |  PGDN  |  PGUP  |  END   |        |        |
             //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
             bindings = <
-                &kp TAB  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans
+                &trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp DEL
                 &trans  &trans  &trans  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &trans  &trans
                 &kp LGUI  &trans  &kp RET  &kp SPACE  &trans  &kp RALT
@@ -129,11 +135,11 @@
         };
 
         raise_layer {
-// -----------------------------------------------------------------------------------------
-// | TAB  |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | DEL  |
-// | CTRL | F1  | F2  | F3  | F4  | F5  |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT | F6  | F7  | F8  | F9  | F10 |   |  _  |  +  |  {  |  }  |  |  |  ~   |
-//                    | GUI |     | ENT |   | SPC |     | ALT |
+            // -------------------------------------------------------------------------------------------------------
+            // |  TAB   |   !    |   @    |   #    |   $    |   %    |   |   ^    |   &    |   *    |   (    |   )    |  DEL   |
+            // |  CTRL  |   F1   |   F2   |   F3   |   F4   |   F5   |   |   -    |   =    |   [    |   ]    |   \    |   `    |
+            // |  SHFT  |   F6   |   F7   |   F8   |   F9   |  F10   |   |   _    |   +    |   {    |   }    |   |    |   ~    |
+            //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
             bindings = <
    &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
    &kp LCTRL &kp F1   &kp F2 &kp F3   &kp F4   &kp F5      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
@@ -142,7 +148,7 @@
             >;
         };
 
-        adjust_layer {
+        Mouse {
 
             // -------------------------------------------------------------------------------------------------------
             // |        |        |        |        |        |        |   |        |        |        |        |        |  DEL   |
@@ -158,17 +164,31 @@
             >;
         };
 
-        BT-LED {
+        System {
             // -------------------------------------------------------------------------------------------------------
-            // |   ~    |  BT0   |  BT1   |  BT2   |  BT3   |  BT4   |   |        |        |        |  MUTE  |        | PSCRN  |
-            // |        |        |        |  BLE   |  USB   |        |   |  SAI   |  BRI   |  HUI   |  VOLU  |        |        |
-            // |        |        |        |        |        |        |   |  SAD   |  BRD   |  EFF   |  VOLD  |        | BTCLR  |
+            // |   ~    |  BT0   |  BT1   |  BT2   |  BT3   |  BT4   |   |  SAI   |  BRI   |  HUI   | C_BRI_ |  VOLU  | PSCRN  |
+            // |        |        |        |  BLE   |  USB   |        |   |  LFT   |  DWN   |   UP   |  RGT   |  MUTE  |        |
+            // |        |        |        |        |        |        |   |  SAD   |  BRD   |  EFF   | C_BRI_ |  VOLD  | BTCLR  |
             //                            |        |        |        |   |  PLAY  |        |        |
             bindings = <
-                &kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &kp C_MUTE  &trans  &kp PSCRN
-                &trans  &none  &none  &out OUT_BLE  &out OUT_USB  &none  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &kp C_VOL_UP  &none  &none
-                &trans  &none  &none  &none  &none  &none  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &kp C_VOL_DN  &none  &bt BT_CLR
+                &kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &kp C_BRI_UP  &kp C_VOL_UP  &kp PSCRN
+                &trans  &none  &none  &out OUT_BLE  &out OUT_USB  &none  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &kp C_MUTE  &none
+                &trans  &none  &none  &none  &none  &none  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &kp C_BRI_DN  &kp C_VOL_DN  &bt BT_CLR
                 &trans  &trans  &trans  &kp C_PLAY_PAUSE  &trans  &trans
+            >;
+        };
+
+        Game {
+            // -------------------------------------------------------------------------------------------------------
+            // |        |        |        |        |        |        |   |        |        |        |        |        |        |
+            // |  SHFT  |        |        |        |        |        |   |        |        |        |        |        |        |
+            // |  CTRL  |        |        |        |        |        |   |        |        |        |        |        |        |
+            //                            |        |  SPC   |        |   |        |        |        |
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &kp LSHFT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &kp LCTRL  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &kp SPACE  &trans  &trans  &trans  &trans
             >;
         };
     };
