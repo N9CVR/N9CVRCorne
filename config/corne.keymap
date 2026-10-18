@@ -142,13 +142,13 @@
         F-Keys {
             label= "F KEY";
             // -------------------------------------------------------------------------------------------------------
-            // |  TAB   |        |        |        |        |        |   |        |        |        |        |        |  DEL   |
+            // |  TAB   | K_WWW  |        |        |        |        |   |        |        |        |        |        |  DEL   |
             // |  CTRL  |   F1   |   F2   |   F3   |   F4   |   F5   |   |   -    |   =    |   [    |   ]    |   \    |   `    |
             // |  SHFT  |   F6   |   F7   |   F8   |   F9   |  F10   |   |   _    |   +    |   {    |   }    |   |    |   ~    |
             //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
             display-name = "F-Keys";
             bindings = <
-                &kp TAB  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &kp DEL
+                &kp TAB  &kp K_WWW  &none  &none  &none  &none  &none  &none  &none  &none  &none  &kp DEL
                 &kp LCTRL  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
                 &kp LSHFT  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp UNDER  &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
                 &kp LGUI  &trans  &kp RET  &kp SPACE  &trans  &kp RALT
