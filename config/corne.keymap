@@ -107,13 +107,12 @@
     keymap {
         compatible = "zmk,keymap";
 
-        Base {
-            label= "BASE";
+        base {
             // -------------------------------------------------------------------------------------------------------
             // |  TAB   |   Q    |   W    |   E    |   R    |   T    |   |   Y    |   U    |   I    |   O    |   P    |  BSPC  |
             // |  CTRL  |   A    |   S    |   D    |   F    |   G    |   |   H    |   J    |   K    |   L    |   ;    |   '    |
             // |  SHFT  |   Z    |   X    |   C    |   V    |   B    |   |   N    |   M    |   ,    |   .    |   /    |  ESC   |
-            //                            |  GUI   | NUMBER |  ENT   |   |  SPC   | F-KEYS |  ALT   |
+            //                            |  GUI   | NUMBER |  ENT   |   |  SPC   | FKEYS  |  ALT   |
             display-name = "Base";
             bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U &kp I     &kp O   &kp P    &kp BSPC
@@ -123,8 +122,7 @@
             >;
         };
 
-        Numbers {
-            label= "NUM";
+        numbers {
             // -------------------------------------------------------------------------------------------------------
             // |        |   1    |   2    |   3    |   4    |   5    |   |   6    |   7    |   8    |   9    |   0    |  DEL   |
             // |        |        |        |        |        |        |   |  LFT   |  DWN   |   UP   |  RGT   |        |  END   |
@@ -139,14 +137,13 @@
             >;
         };
 
-        F-Keys {
-            label= "F KEY";
+        fkeys {
             // -------------------------------------------------------------------------------------------------------
             // |  TAB   | K_WWW  |        |        |        |        |   |        |        |        |        |        |  DEL   |
             // |  CTRL  |   F1   |   F2   |   F3   |   F4   |   F5   |   |   -    |   =    |   [    |   ]    |   \    |   `    |
             // |  SHFT  |   F6   |   F7   |   F8   |   F9   |  F10   |   |   _    |   +    |   {    |   }    |   |    |   ~    |
             //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
-            display-name = "F-Keys";
+            display-name = "FKeys";
             bindings = <
                 &kp TAB  &kp K_WWW  &none  &none  &none  &none  &none  &none  &none  &none  &none  &kp DEL
                 &kp LCTRL  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
@@ -155,8 +152,7 @@
             >;
         };
 
-        MouseAndNum {
-            label= "MOUSE";
+        mouseandnum {
             // -------------------------------------------------------------------------------------------------------
             // |        |  MOUL  |  MOUD  |  MOUU  |  MOUR  |        |   |   7    |   8    |   9    |   -    |        |  DEL   |
             // |        |  SCL   |  SCD   |  SCU   |  SCR   |        |   |   4    |   5    |   6    |   +    |        |        |
@@ -172,13 +168,13 @@
             >;
         };
 
-        System {
-            label= "SYS";
+        system {
             // -------------------------------------------------------------------------------------------------------
             // |   ~    |  BT0   |  BT1   |  BT2   |  BT3   |  BT4   |   |  SAI   |  BRI   |  HUI   | C_BRI_ |  VOLU  | PSCRN  |
             // |        |        |        |  BLE   |  USB   |        |   |  LFT   |  DWN   |   UP   |  RGT   |  MUTE  |        |
             // |        |        |        |        |        |        |   |  SAD   |  BRD   |  EFF   | C_BRI_ |  VOLD  | BTCLR  |
             //                            |        |        |        |   |  PLAY  |        |        |
+            display-name = "System";
             bindings = <
                 &kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &kp C_BRI_UP  &kp C_VOL_UP  &kp PSCRN
                 &trans  &none  &none  &out OUT_BLE  &out OUT_USB  &none  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &kp C_MUTE  &none
@@ -187,13 +183,13 @@
             >;
         };
 
-        Game {
-            label= "GAME";
+        game {
             // -------------------------------------------------------------------------------------------------------
             // |        |        |        |        |        |        |   |        |        |        |        |        |        |
             // |  SHFT  |        |        |        |        |        |   |        |        |        |        |        |        |
             // |  CTRL  |        |        |        |        |        |   |        |        |        |        |        |        |
             //                            |        |  SPC   |        |   |        |        |        |
+            display-name = "Game";
             bindings = <
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                 &kp LSHFT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
