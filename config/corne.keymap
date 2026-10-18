@@ -62,14 +62,14 @@
 
         L_Brace {
             timeout-ms = <50>;
-            key-positions = <0 1>;
+            key-positions = <28 29>;
             layers = <0>;
             bindings = <&kp LBRC>;
         };
 
         R_Brace {
             timeout-ms = <50>;
-            key-positions = <0 1>;
+            key-positions = <30 31>;
             layers = <0>;
             bindings = <&kp RBRC>;
         };
@@ -160,14 +160,14 @@
 
         BT-LED {
             // -------------------------------------------------------------------------------------------------------
-            // |        |  BT0   |  BT1   |  BT2   |  BT3   |  BT4   |   |        |        |        |        |        |        |
+            // |   ~    |  BT0   |  BT1   |  BT2   |  BT3   |  BT4   |   |        |        |        |        |        | PSCRN  |
             // |        |        |        |  BLE   |  USB   |        |   |  SAI   |  BRI   |  HUI   |        |        |        |
             // |        |        |        |        |        |        |   |  SAD   |  BRD   |  EFF   |        |        | BTCLR  |
             //                            |        |        |        |   |        |        |        |
             bindings = <
-                &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &trans  &trans  &trans  &trans  &trans
+                &kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &trans  &trans  &trans  &trans  &kp PSCRN
                 &trans  &trans  &trans  &out OUT_BLE  &out OUT_USB  &trans  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &trans  &trans  &bt BTCLR
+                &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &trans  &trans  &bt BT_CLR
                 &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
