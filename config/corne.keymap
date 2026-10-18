@@ -29,6 +29,74 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        L_Paren {
+            timeout-ms = <50>;
+            key-positions = <4 5>;
+            layers = <0>;
+            bindings = <&kp LPAR>;
+        };
+
+        R_Paren {
+            timeout-ms = <50>;
+            key-positions = <6 7>;
+            layers = <0>;
+            bindings = <&kp RPAR>;
+        };
+
+        L_Bracket {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            layers = <0>;
+            bindings = <&kp LBKT>;
+        };
+
+        R_Bracket {
+            timeout-ms = <50>;
+            key-positions = <18 19>;
+            layers = <0>;
+            bindings = <&kp RBKT>;
+        };
+
+        L_Brace {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            layers = <0>;
+            bindings = <&kp LBRC>;
+        };
+
+        R_Brace {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            layers = <0>;
+            bindings = <&kp RBRC>;
+        };
+
+        Pipe {
+            timeout-ms = <50>;
+            key-positions = <34 35>;
+            layers = <0>;
+            bindings = <&kp PIPE>;
+        };
+
+        Backslash {
+            timeout-ms = <50>;
+            key-positions = <33 34>;
+            layers = <0>;
+            bindings = <&kp BSLH>;
+        };
+
+        BT-LED {
+            timeout-ms = <50>;
+            key-positions = <36 37>;
+            layers = <0>;
+            bindings = <&mo 4>;
+            slow-release;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -47,16 +115,16 @@
         };
 
         lower_layer {
-// -----------------------------------------------------------------------------------------
-// | TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC|
-// |     |PLAY |MUTE |VOLD |VOLU |     |   | LFT | DWN | UP  | RGT |     |     |
-// | SAD | SAI | EFF | BRI | BRD | HUI |   | HOME| PGDN| PGUP| END |     |     |
-//                    | GUI |     | ENT |   | SPC |     | ALT |
+            // -------------------------------------------------------------------------------------------------------
+            // |  TAB   |   1    |   2    |   3    |   4    |   5    |   |   6    |   7    |   8    |   9    |   0    |        |
+            // |        |  PLAY  |  MUTE  |  VOLD  |  VOLU  |        |   |  LFT   |  DWN   |   UP   |  RGT   |        |        |
+            // |        |        |        |        |        |        |   |  HOME  |  PGDN  |  PGUP  |  END   |        |        |
+            //                            |  GUI   |        |  ENT   |   |  SPC   |        |  ALT   |
             bindings = <
-   &kp TAB         &kp N1           &kp N2          &kp N3          &kp N4          &kp N5          &kp N6    &kp N7    &kp N8 &kp N9    &kp N0 &trans
-   &trans          &kp C_PLAY_PAUSE &kp C_MUTE      &kp C_VOL_DN    &kp C_VOL_UP    &trans          &kp LEFT  &kp DOWN  &kp UP &kp RIGHT &trans &trans
-   &rgb_ug RGB_SAD &rgb_ug RGB_SAI  &rgb_ug RGB_EFF &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_HUI &kp HOME  &kp PG_DN &kp PG_UP &kp END &trans &trans
-                                    &kp LGUI        &trans          &kp RET         &kp SPACE &trans    &kp RALT
+                &kp TAB  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans
+                &trans  &kp C_PLAY_PAUSE  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &trans  &trans
+                &kp LGUI  &trans  &kp RET  &kp SPACE  &trans  &kp RALT
             >;
         };
 
@@ -76,17 +144,31 @@
 
         adjust_layer {
 
-// -----------------------------------------------------------------------------------------
-// |     | BT0 | BT1 | BT2 | BT3 | BT4 |  |      |      |      |     | | DEL |
-// |     | SCL | SCD | SCU | SCR |     |  | MOUL | MOUD | MOUU | MOUR| |     |
-// |CAPS | USB | BLE |     |     |     |  |      |      |      |     | |BTCLR|
-//                   |     |     |     |  |      |      |      |
+            // -------------------------------------------------------------------------------------------------------
+            // |        |        |        |        |        |        |   |        |        |        |        |        |  DEL   |
+            // |        |  SCL   |  SCD   |  SCU   |  SCR   |        |   |  MOUL  |  MOUD  |  MOUU  |  MOUR  |        |        |
+            // |  CAPS  |        |        |        |        |        |   |        |        |        |        |        |        |
+            //                            |  MCLK  |        |  LCLK  |   |  RCLK  |        |        |
 
             bindings = <
-&none &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4     &none            &none          &none        &none           &none       &kp DEL
-&none      &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP   &msc SCRL_RIGHT &none           &mmv MOVE_LEFT   &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none       &none
-&kp CAPS   &out OUT_USB   &out OUT_BLE   &none          &none           &none           &none            &none          &none        &none           &none       &bt BT_CLR
-                                         &mkp MCLK       &trans         &mkp LCLK       &mkp RCLK        &trans         &none
+                &none  &trans  &trans  &trans  &trans  &trans  &none  &none  &none  &none  &none  &kp DEL
+                &none  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none  &none
+                &kp CAPS  &trans  &trans  &none  &none  &none  &none  &none  &none  &none  &none  &trans
+                &mkp MCLK  &trans  &mkp LCLK  &mkp RCLK  &trans  &none
+            >;
+        };
+
+        BT-LED {
+            // -------------------------------------------------------------------------------------------------------
+            // |        |  BT0   |  BT1   |  BT2   |  BT3   |  BT4   |   |        |        |        |        |        |        |
+            // |        |        |        |  BLE   |  USB   |        |   |  SAI   |  BRI   |  HUI   |        |        |        |
+            // |        |        |        |        |        |        |   |  SAD   |  BRD   |  EFF   |        |        | BTCLR  |
+            //                            |        |        |        |   |        |        |        |
+            bindings = <
+                &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &out OUT_BLE  &out OUT_USB  &trans  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &trans  &trans  &bt BTCLR
+                &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
