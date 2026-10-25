@@ -2,7 +2,7 @@ manifest:
   defaults:
     revision: n9cvr-v0.3
   remotes:
-    - name: zmkfirmware
+    - name: n9cvr
       url-base: https://github.com/N9CVR
   projects:
     - name: zmk
