@@ -1,12 +1,16 @@
 manifest:
   defaults:
     revision: n9cvr-v0.3
+
   remotes:
     - name: n9cvr
       url-base: https://github.com/N9CVR
+
   projects:
     - name: zmk
-      remote: N9CVRzmk
+      remote: n9cvr
+      repo-path: N9CVRzmk
       import: app/west.yml
+
   self:
     path: config
