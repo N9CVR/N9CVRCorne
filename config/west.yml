@@ -1,12 +1,12 @@
 manifest:
   defaults:
-    revision: v0.3
+    revision: n9cvr-v0.3
   remotes:
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+      url-base: https://github.com/N9CVR
   projects:
     - name: zmk
-      remote: zmkfirmware
+      remote: N9CVRzmk
       import: app/west.yml
   self:
     path: config
