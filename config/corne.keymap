@@ -19,6 +19,14 @@
     chain-length = <27>;
 };
 
+/*
+ * Tell ZMK to allow the matrix to wake it from sleep
+ */
+
+&kscan0 {
+    wakeup-source;
+};
+
 / {
     conditional_layers {
     compatible = "zmk,conditional-layers";
